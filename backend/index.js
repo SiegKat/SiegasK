@@ -9,7 +9,6 @@ const port = process.env.PORT || 5000;
 app.use(express.json()); // Enable JSON parsing
 app.use(express.json());
 
-// Add a phone number
 app.post('/api/numbers', async (req, res) => {
   const { number, carrier, location } = req.body;
   try {

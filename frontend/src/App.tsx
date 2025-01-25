@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [number, setNumber] = useState('');
+  const [result, setResult] = useState(null);
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/numbers/${number}`);
+      setResult(response.data);
+    } catch (error) {
+      console.error(error);
+      alert('Failed to fetch number details');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Phone Lookup</h1>
+      <input
+        type="tel"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+        placeholder="Enter phone number"
+      />
+      <button onClick={handleSearch}>Search</button>
+      {result && (
+        <div>
+          <p>Carrier: {result.carrier}</p>
+          <p>Location: {result.location}</p>
+        </div>
+      )}
     </div>
   );
 }
