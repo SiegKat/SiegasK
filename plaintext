@@ -1,0 +1,5 @@
+phone-lookup-app/  
+├── frontend/          # React app (previously phone-lookup-frontend)  
+├── backend/           # Node.js server (previously phone-lookup-backend)  
+├── .gitignore         # Already initialized with Node.js defaults  
+└── README.md          # Project documentation  
